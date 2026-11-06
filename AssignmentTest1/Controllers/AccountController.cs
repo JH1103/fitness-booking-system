@@ -61,7 +61,7 @@ namespace AssignmentTest1.Controllers
                 else if (role == "Trainer")
                     return RedirectToAction("TrainerDashboard", "Dashboard");
                 else if (role == "Member")
-                    return RedirectToAction("MemberDashboard", "Dashboard");
+                    return RedirectToAction("Index", "Facilities");
                 else
                     return RedirectToAction("Index", "Home");
             }
