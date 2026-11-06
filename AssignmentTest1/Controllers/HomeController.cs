@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Claims;
 using AssignmentTest1.Models.ViewModels;
 
 namespace AssignmentTest1.Controllers
@@ -15,6 +16,20 @@ namespace AssignmentTest1.Controllers
 
         public IActionResult Index()
         {
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                var role = User.FindFirst(ClaimTypes.Role)?.Value;
+
+                if (role == "Admin")
+                    return RedirectToAction("Index", "Dashboard");
+
+                if (role == "Trainer")
+                    return RedirectToAction("TrainerDashboard", "Dashboard");
+
+                if (role == "Member" || role == "Receptionist")
+                    return RedirectToAction("Index", "Facilities");
+            }
+
             return View();
         }
 

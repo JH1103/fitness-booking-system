@@ -1,339 +1,80 @@
-﻿@{
-    ViewData["Title"] = "FitBook - Fitness Class Booking";
+@{
+    ViewData["Title"] = "Welcome to FitBook Clubhouse";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <style>
-    .hero-section {
-        padding: 3rem 0 2rem;
+    .welcome-wrap { max-width: 1050px; margin: 2rem auto; }
+    .welcome-hero {
+        padding: 3rem 1.5rem;
         text-align: center;
+        border-radius: 22px;
         background: linear-gradient(135deg, #EEF1FF 0%, #FFFFFF 100%);
-        border-radius: 16px;
         margin-bottom: 2rem;
     }
-
-        .hero-section .hero-icon {
-            font-size: 64px;
-            color: #4F6EF7;
-            margin-bottom: 1rem;
-        }
-
-        .hero-section h1 {
-            font-size: 2.8rem;
-            font-weight: 700;
-            color: #1A1A2E;
-            letter-spacing: -0.02em;
-        }
-
-            .hero-section h1 span {
-                color: #4F6EF7;
-            }
-
-        .hero-section .lead {
-            font-size: 1.1rem;
-            color: #6B7280;
-            max-width: 500px;
-            margin: 0 auto 1.5rem;
-        }
-
-    .step-card {
-        background: #ffffff;
-        border: 0.5px solid #E5E7EB;
-        border-radius: 12px;
-        padding: 1.5rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        height: 100%;
-        position: relative;
+    .welcome-hero .hero-icon { font-size: 3.5rem; color: #4F6EF7; margin-bottom: 1rem; }
+    .welcome-hero h1 { color: #1A1A2E; font-weight: 800; }
+    .welcome-hero h1 span { color: #4F6EF7; }
+    .welcome-hero p { color: #6B7280; max-width: 620px; margin: .75rem auto 0; }
+    .access-card {
+        height: 100%; background: #fff; border: 1px solid #E5E7EB;
+        border-radius: 16px; padding: 2rem 1.5rem; text-align: center;
+        transition: all .25s ease;
     }
-
-        .step-card:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            transform: translateY(-4px);
-        }
-
-        .step-card .step-number {
-            display: inline-block;
-            width: 40px;
-            height: 40px;
-            line-height: 40px;
-            border-radius: 50%;
-            background: #4F6EF7;
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-
-        .step-card h5 {
-            font-weight: 600;
-            color: #1A1A2E;
-            margin-bottom: 0.5rem;
-        }
-
-        .step-card p {
-            font-size: 0.95rem;
-            color: #6B7280;
-            margin-bottom: 0;
-        }
-
-    .feature-card {
-        background: #ffffff;
-        border: 0.5px solid #E5E7EB;
-        border-radius: 12px;
-        padding: 1.5rem 1.25rem;
-        text-align: center;
-        transition: all 0.3s ease;
-        height: 100%;
+    .access-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,.08); }
+    .access-icon {
+        width: 66px; height: 66px; border-radius: 18px; margin: 0 auto 1.2rem;
+        display: grid; place-items: center; background: #EEF1FF; color: #4F6EF7; font-size: 1.7rem;
     }
-
-        .feature-card:hover {
-            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
-            transform: translateY(-4px);
-        }
-
-        .feature-card .feature-icon {
-            font-size: 36px;
-            color: #4F6EF7;
-            margin-bottom: 0.75rem;
-        }
-
-        .feature-card h6 {
-            font-weight: 600;
-            color: #1A1A2E;
-            margin-bottom: 0.25rem;
-        }
-
-        .feature-card p {
-            font-size: 0.85rem;
-            color: #6B7280;
-            margin-bottom: 0;
-        }
-
-    .cta-buttons .btn {
-        padding: 0.7rem 2.5rem;
-        border-radius: 50px;
-        font-weight: 600;
-        font-size: 1rem;
-    }
-
-    .section-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #1A1A2E;
-        text-align: center;
-        margin-bottom: 1.5rem;
-    }
-
-        .section-title i {
-            color: #4F6EF7;
-            margin-right: 0.5rem;
-        }
-
-    .testimonial-card {
-        background: #F9FAFB;
-        border-radius: 12px;
-        padding: 1.25rem 1.5rem;
-        border: 0.5px solid #E5E7EB;
-        height: 100%;
-    }
-
-        .testimonial-card p {
-            font-size: 0.95rem;
-            color: #1A1A2E;
-            font-style: italic;
-            margin-bottom: 0.5rem;
-        }
-
-        .testimonial-card .testimonial-author {
-            font-weight: 600;
-            color: #4F6EF7;
-            font-size: 0.85rem;
-        }
-
-        .testimonial-card .testimonial-role {
-            font-size: 0.75rem;
-            color: #6B7280;
-        }
-
-    @@media (max-width: 768px) {
-        .hero-section h1 {
-            font-size: 2rem;
-        }
-
-        .hero-section .lead {
-            font-size: 1rem;
-        }
-
-        .cta-buttons .btn {
-            padding: 0.6rem 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .section-title {
-            font-size: 1.25rem;
-        }
-    }
+    .access-card h4 { color: #1A1A2E; font-weight: 700; }
+    .access-card p { color: #6B7280; min-height: 48px; }
+    .access-card .btn { border-radius: 50px; padding: .7rem 1.5rem; font-weight: 600; }
+    .welcome-note { color: #6B7280; font-size: .9rem; text-align: center; margin-top: 1.5rem; }
 </style>
 
-<div class="container mt-4">
+<div class="container welcome-wrap">
+    <section class="welcome-hero fade-in-up">
+        <div class="hero-icon"><i class="fas fa-building"></i></div>
+        <h1>Welcome to <span>FitBook Clubhouse</span></h1>
+        <p>Enjoy convenient access to clubhouse facilities and fitness activities. Choose how you would like to continue.</p>
+    </section>
 
-    <!-- ===== HERO SECTION ===== -->
-    <div class="hero-section fade-in-up">
-        <div class="hero-icon">
-            <i class="fas fa-dumbbell"></i>
-        </div>
-        <h1>Welcome to <span>FitBook</span></h1>
-        <p class="lead">
-            Book fitness classes, track your progress, and achieve your goals — all in one place.
-        </p>
-
-        <div class="cta-buttons d-flex gap-3 justify-content-center flex-wrap mt-3">
-            @if (User.Identity?.IsAuthenticated == true)
-            {
-                @if (User.IsInRole("Member"))
-                {
-                    <a asp-controller="Booking" asp-action="ClassCatalog" class="btn btn-primary">
-                        <i class="fas fa-search me-2"></i>Browse Classes
-                    </a>
-                    <a asp-controller="Dashboard" asp-action="MemberDashboard" class="btn btn-outline-primary">
-                        <i class="fas fa-chart-pie me-2"></i>Dashboard
-                    </a>
-                }
-                else if (User.IsInRole("Trainer"))
-                {
-                    <a asp-controller="Dashboard" asp-action="TrainerDashboard" class="btn btn-primary">
-                        <i class="fas fa-chart-pie me-2"></i>Dashboard
-                    </a>
-                }
-                else if (User.IsInRole("Admin"))
-                {
-                    <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary">
-                        <i class="fas fa-chart-pie me-2"></i>Dashboard
-                    </a>
-                }
-            }
-            else
-            {
-                <a asp-controller="Account" asp-action="Register" class="btn btn-primary">
-                    <i class="fas fa-user-plus me-2"></i>Get Started Free
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="access-card">
+                <div class="access-icon"><i class="fas fa-user-check"></i></div>
+                <h4>Existing Member</h4>
+                <p>Sign in to your member account to manage your bookings and membership.</p>
+                <a asp-controller="Account" asp-action="Login" class="btn btn-primary w-100">
+                    <i class="fas fa-sign-in-alt me-2"></i>Member Login
                 </a>
-                <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary">
-                    <i class="fas fa-sign-in-alt me-2"></i>Sign In
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="access-card">
+                <div class="access-icon"><i class="fas fa-user-plus"></i></div>
+                <h4>New Member</h4>
+                <p>Create an account to enjoy member services and manage your activities.</p>
+                <a asp-controller="Account" asp-action="Register" class="btn btn-outline-primary w-100">
+                    <i class="fas fa-user-plus me-2"></i>Register Now
                 </a>
-            }
+            </div>
         </div>
-    </div>
 
-    <!-- ===== HOW IT WORKS (3 Steps) ===== -->
-    <div class="mb-5">
-        <h3 class="section-title"><i class="fas fa-compass"></i>How It Works</h3>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="step-card">
-                    <div class="step-number">1</div>
-                    <h5>Browse Classes</h5>
-                    <p>Explore a variety of fitness classes from Yoga to HIIT, Zumba to Pilates.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="step-card">
-                    <div class="step-number">2</div>
-                    <h5>Book Your Spot</h5>
-                    <p>Choose a class, pick a time, and book your spot in just one click.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="step-card">
-                    <div class="step-number">3</div>
-                    <h5>Track Progress</h5>
-                    <p>View your bookings, attendance history, and upcoming classes.</p>
-                </div>
+        <div class="col-md-4">
+            <div class="access-card">
+                <div class="access-icon"><i class="fas fa-walking"></i></div>
+                <h4>Visitor</h4>
+                <p>Continue without an account to explore facilities and make an online visitor booking.</p>
+                <a asp-controller="Facilities" asp-action="Index" class="btn btn-outline-dark w-100">
+                    <i class="fas fa-arrow-right me-2"></i>Continue as Visitor
+                </a>
             </div>
         </div>
     </div>
 
-    <!-- ===== FEATURES ===== -->
-    <div class="mb-5">
-        <h3 class="section-title"><i class="fas fa-star"></i>Why Join FitBook?</h3>
-        <div class="row g-4">
-            <div class="col-md-3 col-6">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
-                    <h6>Easy Booking</h6>
-                    <p>Book in seconds</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-users"></i></div>
-                    <h6>Expert Trainers</h6>
-                    <p>Certified professionals</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
-                    <h6>Flexible Schedule</h6>
-                    <p>Classes daily</p>
-                </div>
-            </div>
-            <div class="col-md-3 col-6">
-                <div class="feature-card">
-                    <div class="feature-icon"><i class="fas fa-heart"></i></div>
-                    <h6>Track Progress</h6>
-                    <p>Stay motivated</p>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== WHAT MEMBERS SAY (Testimonials) ===== -->
-    <div class="mb-4">
-        <h3 class="section-title"><i class="fas fa-quote-right"></i>What Members Say</h3>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <p>"FitBook made it so easy to find and book classes. I've never been more consistent with my fitness!"</p>
-                    <div class="testimonial-author">— Sarah M.</div>
-                    <div class="testimonial-role">Member since 2026</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <p>"The trainers are amazing and the booking system is super smooth. Highly recommended!"</p>
-                    <div class="testimonial-author">— John L.</div>
-                    <div class="testimonial-role">Member since 2026</div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="testimonial-card">
-                    <p>"I love the variety of classes. From yoga to HIIT, there's something for everyone."</p>
-                    <div class="testimonial-author">— Emily T.</div>
-                    <div class="testimonial-role">Member since 2026</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- ===== CTA BANNER ===== -->
-    <div class="bg-primary text-white p-4 rounded-4 text-center mb-4" style="background: linear-gradient(135deg, #4F6EF7 0%, #3A56D4 100%);">
-        <h4 class="fw-bold mb-2">Ready to start your fitness journey?</h4>
-        <p class="mb-3 opacity-75" style="font-size: 1.05rem;">
-            Join thousands of members already using FitBook.
-        </p>
-        @if (!User.Identity?.IsAuthenticated == true)
-        {
-            <a asp-controller="Account" asp-action="Register" class="btn btn-light btn-lg fw-bold px-5" style="border-radius: 50px;">
-                <i class="fas fa-user-plus me-2"></i>Create Free Account
-            </a>
-        }
-        else
-        {
-            <a asp-controller="Booking" asp-action="ClassCatalog" class="btn btn-light btn-lg fw-bold px-5" style="border-radius: 50px;">
-                <i class="fas fa-search me-2"></i>Browse Classes
-            </a>
-        }
-    </div>
-
+    <p class="welcome-note">
+        Walk-in visitors may also request booking assistance from the clubhouse receptionist.
+    </p>
 </div>

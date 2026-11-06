@@ -61,7 +61,7 @@ namespace AssignmentTest1.Controllers
                 else if (role == "Trainer")
                     return RedirectToAction("TrainerDashboard", "Dashboard");
                 else if (role == "Member")
-                    return RedirectToAction("MemberDashboard", "Dashboard");
+                    return RedirectToAction("Index", "Facilities");
                 else
                     return RedirectToAction("Index", "Home");
             }
@@ -174,6 +174,8 @@ namespace AssignmentTest1.Controllers
                 return RedirectToAction("Index", "Dashboard");
             else if (user.Role == "Trainer")
                 return RedirectToAction("TrainerDashboard", "Dashboard");
+            else if (user.Role == "Member")
+                return RedirectToAction("Index", "Facilities");
             else
                 return RedirectToAction("Index", "Home");
         }
@@ -183,7 +185,7 @@ namespace AssignmentTest1.Controllers
         {
             if (User.Identity?.IsAuthenticated == true)
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Facilities");
             }
             return View();
         }
@@ -255,7 +257,7 @@ namespace AssignmentTest1.Controllers
             else if (user.Role == "Trainer")
                 return RedirectToAction("TrainerDashboard", "Dashboard");
             else if (user.Role == "Member")
-                return RedirectToAction("MemberDashboard", "Dashboard");
+                return RedirectToAction("Index", "Facilities");
             else
                 return RedirectToAction("Index", "Home");
         }
