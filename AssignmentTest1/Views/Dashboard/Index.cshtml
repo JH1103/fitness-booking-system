@@ -28,6 +28,7 @@
                 <li><a href="@Url.Action("Index", "Schedule")"><i class="fas fa-calendar-alt"></i><span>Schedules</span></a></li>
                 <li><a href="@Url.Action("Plans", "Membership")"><i class="fas fa-crown"></i><span>Memberships</span></a></li>
                 <li><a href="@Url.Action("AdminIndex", "Booking")"><i class="fas fa-calendar-check"></i><span>Bookings</span></a></li>
+                <li><a href="@Url.Action("Index", "FacilityAdmin")"><i class="fas fa-building"></i><span>Facilities</span></a></li>
                 <li style="margin-top:20px;">
                     <form asp-controller="Account" asp-action="Logout" method="post">
                         @Html.AntiForgeryToken()
@@ -110,6 +111,7 @@
                     <a href="@Url.Action("Plans", "Membership")" class="quick-action blue"><i class="fas fa-crown"></i> Memberships</a>
                     <a href="@Url.Action("AdminIndex", "Booking")" class="quick-action green"><i class="fas fa-calendar-check"></i> Bookings</a>
                     <a href="@Url.Action("Index", "Trainer")" class="quick-action orange"><i class="fas fa-user-tie"></i> Trainers</a>
+                    <a href="@Url.Action("Index", "FacilityAdmin")" class="quick-action blue"><i class="fas fa-building"></i> Manage Facilities</a>
                 </div>
             </div>
 

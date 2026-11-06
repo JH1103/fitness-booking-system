@@ -32,9 +32,14 @@ namespace AssignmentTest1.Data
 
         public DbSet<PrivateSession> PrivateSessions { get; set; }
         public DbSet<ClassScheduleTemplate> ClassScheduleTemplates { get; set; }
+        public DbSet<Facility> Facilities { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Facility>()
+                .Property(f => f.HourlyRate)
+                .HasPrecision(18, 2);
 
             // Configure relationships with DELETE RESTRICT to avoid cascade issues
 
