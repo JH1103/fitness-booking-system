@@ -1,63 +1,52 @@
+@model IEnumerable<AssignmentTest1.Models.Entities.Facility>
 @{
     ViewData["Title"] = "Clubhouse Facilities";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string GetIcon(string category) => category?.ToLower() switch
+    {
+        "sports" => "fa-table-tennis-paddle-ball",
+        "swimming" => "fa-water",
+        "events" => "fa-people-group",
+        "fitness" => "fa-dumbbell",
+        _ => "fa-building"
+    };
 }
 
 <style>
-    .facility-hero {
-        padding: 2.5rem 1.5rem; border-radius: 20px; text-align: center;
-        background: linear-gradient(135deg, #EEF1FF 0%, #FFFFFF 100%);
-        margin: 1rem 0 2rem;
-    }
-    .facility-hero h1 { font-weight: 800; color: #1A1A2E; }
-    .facility-hero h1 span { color: #4F6EF7; }
-    .facility-hero p { color: #6B7280; max-width: 650px; margin: .75rem auto 0; }
-    .facility-card {
-        height: 100%; border: 1px solid #E5E7EB; border-radius: 16px;
-        overflow: hidden; background: #fff; transition: all .25s ease;
-    }
-    .facility-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(0,0,0,.09); }
-    .facility-art {
-        min-height: 155px; display: grid; place-items: center;
-        background: linear-gradient(135deg, #EEF1FF, #F8FAFF); color: #4F6EF7;
-        font-size: 3.5rem;
-    }
-    .facility-body { padding: 1.35rem; }
-    .facility-body h4 { font-weight: 700; color: #1A1A2E; }
-    .facility-body p { color: #6B7280; min-height: 48px; }
-    .facility-tag {
-        display: inline-block; background: #EEF1FF; color: #3A56D4;
-        border-radius: 30px; padding: .3rem .7rem; font-size: .75rem; font-weight: 600;
-    }
-    .booking-info {
-        background: #fff; border: 1px solid #E5E7EB; border-radius: 14px;
-        padding: 1.25rem 1.5rem; margin-top: 2rem;
-    }
+    .facility-hero { padding:2.5rem 1.5rem; border-radius:20px; text-align:center; background:linear-gradient(135deg,#EEF1FF 0%,#FFFFFF 100%); margin:1rem 0 2rem; }
+    .facility-hero h1 { font-weight:800; color:#1A1A2E; }
+    .facility-hero h1 span { color:#4F6EF7; }
+    .facility-hero p { color:#6B7280; max-width:650px; margin:.75rem auto 0; }
+    .facility-card { height:100%; border:1px solid #E5E7EB; border-radius:16px; overflow:hidden; background:#fff; transition:all .25s ease; }
+    .facility-card:hover { transform:translateY(-4px); box-shadow:0 12px 30px rgba(0,0,0,.08); }
+    .facility-art { min-height:135px; display:grid; place-items:center; background:linear-gradient(135deg,#EEF1FF,#F8FAFF); color:#4F6EF7; font-size:3rem; }
+    .facility-body { padding:1.25rem; }
+    .facility-body h4 { font-weight:700; color:#1A1A2E; }
+    .facility-body p { color:#6B7280; min-height:48px; }
+    .facility-tag { display:inline-block; background:#EEF1FF; color:#3A56D4; border-radius:30px; padding:.3rem .7rem; font-size:.75rem; font-weight:600; }
+    .facility-meta { display:flex; justify-content:space-between; gap:.5rem; color:#6B7280; font-size:.88rem; margin:.8rem 0 1rem; }
+    .booking-info { background:#fff; border:1px solid #E5E7EB; border-radius:14px; padding:1.25rem 1.5rem; margin-top:2rem; }
 </style>
 
 <div class="container">
-    <section class="facility-hero fade-in-up">
+    <section class="facility-hero">
         <div class="mb-3" style="font-size:2.5rem;color:#4F6EF7;"><i class="fas fa-building"></i></div>
         <h1>Explore Our <span>Clubhouse Facilities</span></h1>
-        <p>All facilities are located within the same clubhouse. Browse the facilities and find an activity that suits you.</p>
+        <p>All facilities are located within the same clubhouse. Each court, pool or room is listed separately so its availability can be managed individually.</p>
         @if (User.Identity?.IsAuthenticated == true)
         {
-            <div class="mt-3">
-                <span class="badge bg-light text-dark border">Welcome, @User.Identity.Name</span>
-            </div>
+            <div class="mt-3"><span class="badge bg-light text-dark border">Welcome, @User.Identity.Name</span></div>
         }
         else
         {
-            <div class="mt-3">
-                <span class="badge bg-light text-dark border">Browsing as visitor</span>
-            </div>
+            <div class="mt-3"><span class="badge bg-light text-dark border">Browsing as visitor</span></div>
         }
     </section>
 
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
         <div>
-            <h3 class="fw-bold mb-1">Available Facility Categories</h3>
-            <p class="text-muted mb-0">Choose a facility category to explore.</p>
+            <h3 class="fw-bold mb-1">Our Facilities</h3>
+            <p class="text-muted mb-0">Browse each individual facility in the clubhouse.</p>
         </div>
         @if (User.Identity?.IsAuthenticated != true)
         {
@@ -67,69 +56,44 @@
         }
     </div>
 
-    <div class="row g-4">
-        <div class="col-md-6 col-xl-3">
-            <article class="facility-card">
-                <div class="facility-art"><i class="fas fa-table-tennis-paddle-ball"></i></div>
-                <div class="facility-body">
-                    <span class="facility-tag">Sports</span>
-                    <h4 class="mt-2">Badminton Courts</h4>
-                    <p>Reserve a court for friendly games, practice sessions or group activities.</p>
-                    <button type="button" class="btn btn-outline-primary w-100" disabled>Booking module coming next</button>
+    @if (Model != null && Model.Any())
+    {
+        <div class="row g-4">
+            @foreach (var facility in Model)
+            {
+                <div class="col-md-6 col-xl-4">
+                    <article class="facility-card">
+                        <div class="facility-art"><i class="fas @GetIcon(facility.Category)"></i></div>
+                        <div class="facility-body">
+                            <span class="facility-tag">@facility.Category</span>
+                            <h4 class="mt-2 mb-2">@facility.Name</h4>
+                            <p>@(string.IsNullOrWhiteSpace(facility.Description) ? "Enjoy this facility at our clubhouse." : facility.Description)</p>
+                            <div class="facility-meta">
+                                <span><i class="fas fa-users me-1"></i>Up to @facility.Capacity</span>
+                                <strong class="text-dark">RM @facility.HourlyRate.ToString("0.00") / hour</strong>
+                            </div>
+                            <button type="button" class="btn btn-outline-primary w-100" disabled>Booking module coming next</button>
+                        </div>
+                    </article>
                 </div>
-            </article>
+            }
         </div>
-
-        <div class="col-md-6 col-xl-3">
-            <article class="facility-card">
-                <div class="facility-art"><i class="fas fa-water"></i></div>
-                <div class="facility-body">
-                    <span class="facility-tag">Swimming</span>
-                    <h4 class="mt-2">Swimming Pools</h4>
-                    <p>Check swimming sessions, pool schedules and visitor capacity.</p>
-                    <button type="button" class="btn btn-outline-primary w-100" disabled>Booking module coming next</button>
-                </div>
-            </article>
+    }
+    else
+    {
+        <div class="text-center bg-white border rounded-4 p-5">
+            <i class="fas fa-building-circle-exclamation text-primary fs-1 mb-3"></i>
+            <h4 class="fw-bold">Facilities are being prepared</h4>
+            <p class="text-muted mb-0">There are no active facilities available at the moment. Please check again later.</p>
         </div>
-
-        <div class="col-md-6 col-xl-3">
-            <article class="facility-card">
-                <div class="facility-art"><i class="fas fa-people-group"></i></div>
-                <div class="facility-body">
-                    <span class="facility-tag">Events</span>
-                    <h4 class="mt-2">Function Rooms</h4>
-                    <p>Find a suitable room for meetings, celebrations and private events.</p>
-                    <button type="button" class="btn btn-outline-primary w-100" disabled>Booking module coming next</button>
-                </div>
-            </article>
-        </div>
-
-        <div class="col-md-6 col-xl-3">
-            <article class="facility-card">
-                <div class="facility-art"><i class="fas fa-dumbbell"></i></div>
-                <div class="facility-body">
-                    <span class="facility-tag">Fitness</span>
-                    <h4 class="mt-2">Fitness Classes</h4>
-                    <p>Continue using the existing FitBook fitness-class catalogue and schedules.</p>
-                    @if (User.IsInRole("Member"))
-                    {
-                        <a asp-controller="Booking" asp-action="ClassCatalog" class="btn btn-primary w-100">Browse Classes</a>
-                    }
-                    else
-                    {
-                        <a asp-controller="Account" asp-action="Login" class="btn btn-outline-primary w-100">Member Login Required</a>
-                    }
-                </div>
-            </article>
-        </div>
-    </div>
+    }
 
     <section class="booking-info">
         <div class="d-flex align-items-start gap-3">
             <div class="text-primary fs-3"><i class="fas fa-circle-info"></i></div>
             <div>
                 <h5 class="fw-bold mb-1">Need help with a walk-in booking?</h5>
-                <p class="text-muted mb-0">Visitors who arrive at the clubhouse can ask the receptionist to check the latest availability and create a booking. Online and receptionist bookings will use the same availability records.</p>
+                <p class="text-muted mb-0">Visitors can ask the receptionist to check availability and create a booking. Online and receptionist bookings will use the same availability records.</p>
             </div>
         </div>
     </section>
